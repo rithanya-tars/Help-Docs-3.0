@@ -12,77 +12,66 @@
     "default": "dark"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "group": "Build",
+        "pages": [
+          "build/creating-an-agent",
+          "build/workflow-based-mode",
+          "build/conversational-ai-mode",
+          "build/live-chat-handoff",
+          "build/knowledge-base",
           {
-            "group": "Get Started",
+            "group": "Tools",
             "pages": [
-              "index"
+              "build/tools",
+              "build/custom-toolkit"
             ]
           },
           {
-            "group": "Build",
+            "group": "Configure",
             "pages": [
-              "build/creating-an-agent",
-              "build/workflow-based-mode",
-              "build/conversational-ai-mode",
-              "build/live-chat-handoff",
-              "build/knowledge-base",
-              {
-                "group": "Tools",
-                "pages": [
-                  "build/tools",
-                  "build/custom-toolkit"
-                ]
-              },
-              {
-                "group": "Configure",
-                "pages": [
-                  "build/configure/general",
-                  "build/configure/language",
-                  "build/configure/notifications",
-                  "build/configure/voice"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Test",
-            "pages": [
-              "test/overview"
-            ]
-          },
-          {
-            "group": "Deploy",
-            "pages": [
-              "deploy/overview"
-            ]
-          },
-          {
-            "group": "Conversations",
-            "pages": [
-              "conversations/unified-inbox",
-              "conversations/live-monitoring",
-              "conversations/taking-over",
-              "conversations/resolve-snooze-reopen",
-              "conversations/private-notes-canned-responses",
-              "conversations/assignment-strategy"
-            ]
-          },
-          {
-            "group": "Analytics & Insights",
-            "pages": [
-              "analytics/overview"
-            ]
-          },
-          {
-            "group": "Outbound",
-            "pages": [
-              "outbound/overview"
+              "build/configure/general",
+              "build/configure/language",
+              "build/configure/notifications",
+              "build/configure/voice"
             ]
           }
+        ]
+      },
+      {
+        "group": "Test",
+        "pages": [
+          "test/overview"
+        ]
+      },
+      {
+        "group": "Deploy",
+        "pages": [
+          "deploy/overview"
+        ]
+      },
+      {
+        "group": "Conversations",
+        "pages": [
+          "conversations/unified-inbox",
+          "conversations/live-monitoring",
+          "conversations/taking-over",
+          "conversations/resolve-snooze-reopen",
+          "conversations/private-notes-canned-responses",
+          "conversations/assignment-strategy"
+        ]
+      },
+      {
+        "group": "Analytics & Insights",
+        "pages": [
+          "analytics/overview"
+        ]
+      },
+      {
+        "group": "Outbound",
+        "pages": [
+          "outbound/overview"
         ]
       }
     ]
