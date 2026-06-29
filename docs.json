@@ -1,0 +1,103 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Tars",
+  "colors": {
+    "primary": "#9333EA",
+    "light": "#A855F7",
+    "dark": "#7E22CE"
+  },
+  "favicon": "/favicon.svg",
+  "appearance": {
+    "default": "dark"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "index"
+            ]
+          },
+          {
+            "group": "Build",
+            "pages": [
+              "build/creating-an-agent",
+              "build/workflow-based-mode",
+              "build/conversational-ai-mode",
+              "build/live-chat-handoff",
+              "build/knowledge-base",
+              {
+                "group": "Tools",
+                "pages": [
+                  "build/tools",
+                  "build/custom-toolkit"
+                ]
+              },
+              {
+                "group": "Configure",
+                "pages": [
+                  "build/configure/general",
+                  "build/configure/language",
+                  "build/configure/notifications",
+                  "build/configure/voice"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Test",
+            "pages": [
+              "test/overview"
+            ]
+          },
+          {
+            "group": "Deploy",
+            "pages": [
+              "deploy/overview"
+            ]
+          },
+          {
+            "group": "Conversations",
+            "pages": [
+              "conversations/unified-inbox",
+              "conversations/live-monitoring",
+              "conversations/taking-over",
+              "conversations/resolve-snooze-reopen",
+              "conversations/private-notes-canned-responses",
+              "conversations/assignment-strategy"
+            ]
+          },
+          {
+            "group": "Analytics & Insights",
+            "pages": [
+              "analytics/overview"
+            ]
+          },
+          {
+            "group": "Outbound",
+            "pages": [
+              "outbound/overview"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Login",
+      "href": "https://app.hellotars.com"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/hellotars_ai",
+      "linkedin": "https://www.linkedin.com/company/tars"
+    }
+  }
+}
