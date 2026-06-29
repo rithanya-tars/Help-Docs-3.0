@@ -1,0 +1,117 @@
+---
+title: "Knowledge Base"
+description: "Create a Knowledge Base and add sources so your AI Agent can answer from your content."
+---
+
+A **Knowledge Base (KB)** is a collection of content your AI Agent can read from to answer user questions. Add a website or PDF document as a source, train the KB, then attach it to an AI Agent Gambit.
+
+Knowledge Bases are **Organization-level** — they sit alongside Agents and Tools in the sidebar, and a single KB can be reused across any Agent in your Org.
+
+## When to use a Knowledge Base
+
+Use a KB when your Agent needs to answer questions about specific content — your product docs, FAQs, policies, course catalogue, support material, anything written down.
+
+You don't need a KB for:
+
+- Simple flows that don't answer open questions (lead capture, booking)
+- Agents that only call Tools and don't need to *explain* anything
+
+## The Knowledge page
+
+From the left sidebar, click **Knowledge**.
+
+`[SCREENSHOT: Knowledge page with the My Knowledge tab and KB cards]`
+
+The page has two tabs:
+
+- **My Knowledge** — all the Knowledge Bases in your Organization
+- **Add Knowledge** — create a new Knowledge Base
+
+Each KB card shows the name, when it was last updated, how many resources it contains, the training status (**Trained** or **Not Trained**), and a **Configure** button to open it.
+
+## Supported source types
+
+Two source types are supported:
+
+| Source | What it does |
+| --- | --- |
+| **Website URL** | Crawls a website and extracts content from its pages |
+| **Documents (PDF)** | Extracts content from one or more PDF files you upload |
+
+`[SCREENSHOT: Add Knowledge picker showing Website URL and Documents (PDF) as the active options]`
+
+## Creating a Knowledge Base from a website
+
+1. Click **Add Knowledge**, then select **Website URL**
+    
+    `[SCREENSHOT: Website URL card highlighted in the picker]`
+    
+2. Give the KB a **Name** (e.g., *"Product docs"*, *"Help Center"*)
+3. Enter your **Website base URL** (e.g., `https://example.com`)
+4. Optionally open **Advanced Settings** to control crawl depth, page count, and rendering. Defaults work for most sites.
+5. Click **Add Knowledge Base**
+
+The KB is created. Open it to fetch and train.
+
+## Creating a Knowledge Base from PDF documents
+
+1. Click **Add Knowledge**, then select **Documents (PDF)**
+
+`[SCREENSHOT: Add Knowledge Base form for PDF, showing the drop zone]`
+
+1. Give the KB a **Name**
+2. Drag and drop PDF files into the upload area, or click **browse files**
+3. Click **Add Knowledge Base**
+
+The KB is created with your uploaded PDFs as resources. Open it to train. 
+
+## Adding more resources
+
+Open any existing KB and click **Add Resource** to add more files (PDF KBs) or more URLs (Website KBs).
+
+`[SCREENSHOT: Add Resource button visible on the KB detail page]`
+
+<Note>
+  After adding new resources, you need to click **Start Training** again so the new content is processed. Updating existing resources works the same way — re-add the updated version and train again.
+</Note>
+
+## Attaching a Knowledge Base to an Agent
+
+A KB only gets used when it's attached to an **AI Agent Gambit**.
+
+1. Add the **Knowledge** Gambit to the canvas 
+2. Open the Knowledge Gambit. Under **Knowledge Bases**, click **Select knowledge bases** and pick the KB you want to attach. Click **Save**.
+3. On the canvas, connect the Knowledge Gambit to the **AI Agent Gambit.** 
+
+Now when the AI Agent runs, it can pull from the KB to answer questions.
+
+<Tip>
+  Mention the KB in your Agent's prompt — e.g., *"You have access to a knowledge base about our product. Use it to answer questions accurately. If the answer isn't in the knowledge base, say so honestly."* This makes the Agent use the KB more reliably.
+</Tip>
+
+For full setup of the AI Agent Gambit, see **Conversational AI mode (hyperlink)**.
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="How do I update a Knowledge Base when the source content changes?">
+    Add the updated file or the Website link as a new resource. 
+  </Accordion>
+  <Accordion title="Can one Knowledge Base be used by multiple Agents?">
+    Yes. Knowledge Bases are Organization-level. The same KB can be attached to as many AI Agent Gambits across as many Agents as you need.
+  </Accordion>
+  <Accordion title="Can one Agent use multiple Knowledge Bases?">
+    Yes. Attach as many KBs as the Agent needs. The Agent decides which one to pull from based on the user's question.
+  </Accordion>
+  <Accordion title="What's the difference between resources and Knowledge Bases?">
+    A **Knowledge Base** is the container. **Resources** are the individual sources inside it — one PDF, one website URL, etc. A single KB can have many resources.
+  </Accordion>
+  <Accordion title="Why is my KB showing Not Trained?">
+    Either you haven't clicked **Start Training** yet, or new resources have been added since the last training. Open the KB and click **Start Training** to process all current resources.
+  </Accordion>
+</AccordionGroup>
+
+## What's next (hyperlinked)
+
+- **Conversational AI mode** — attach your KB to an AI Agent Gambit
+- **Tools** — set up Tools the Agent can call alongside Knowledge

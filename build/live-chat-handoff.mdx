@@ -1,0 +1,83 @@
+---
+title: "Live Chat handoff"
+description: "Hand off a conversation from the Agent to a human — through a button, AI decision, or manual takeover."
+---
+
+Live Chat handoff is how a conversation moves from the Agent to a human live chat agent. The one Gambit type that sets up the handoff itself: the **Livechat Gambit**.
+
+This article covers how to add and configure the Livechat Gambit.
+
+## Adding the Livechat Gambit
+
+From the Gambit picker, open the **Integration** category and add **Livechat** to the canvas.
+
+Place it at the point in the flow where you want handoff to happen — typically after a Button Gambit (for the explicit path) or after an AI Agent Gambit (for the AI-decided path).
+
+`[SCREENSHOT: Example flow showing Button → Livechat Gambit and AI Agent → Livechat Gambit patterns]`
+
+## Configuring the Livechat Gambit
+
+Opening the Gambit shows three sections.
+
+`SCREENSHOT`
+
+### 1. Inbox
+
+**Select Inbox** — choose which inbox receives this conversation. Each inbox in your Organization can be assigned to a different team or use case.
+
+**CSAT Survey** — toggle on to ask the visitor to rate their experience after the conversation is resolved.
+
+### 2. Visitor Details
+
+These fields tell the live chat agent who they're talking to. Each field can pull data from earlier Gambits in the flow.
+
+| Field | What goes here |
+| --- | --- |
+| **Visitor's Name** | The visitor's name |
+| **Visitor's Email** | Must follow `user@example.com` format |
+| **Visitor's Phone Number** | Must follow `+[country code][number]` format, e.g. `+123456789` |
+| **Chat Start Message** | The initial context message the live chat agent sees when the conversation starts |
+
+<Tip>
+  Type **@** in any of these fields to reference a value from an earlier Gambit — e.g., `@name` pulls the name collected in a previous Gambit, `@email` pulls the email. You can reference any Gambit's collected value this way.
+</Tip>
+
+The Chat Start Message is especially useful — it tells the agent what the user was doing or asking about before handoff, so they don't have to read the full transcript to catch up.
+
+### 3. Exit Paths
+
+`[SCREENSHOT: Exit Paths section showing Conversation Resolved + No Agents Available]`
+
+What the visitor sees when the live chat conversation ends.
+
+**Conversation Resolved** — shown when an agent marks the conversation as resolved and the live chat session ends normally. Default message: *"The conversation has been closed by the agent."*
+
+**No Agents Available** — shown when no live chat agents are online to accept the conversation. The flow then continues to the next Gambit. Default message: *"Our agents are not available as of now."*
+
+<Note>
+  When **No Agents Available** triggers, the conversation doesn't end — the flow continues to whatever Gambit comes after the Livechat Gambit. Use this exit to fall back gracefully (offer to email, schedule a callback, etc.) rather than leaving the user stuck.
+</Note>
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="What happens if no agents are online?">
+    The Livechat Gambit takes the **No Agents Available** exit. The visitor sees the configured message, and the flow continues to the next Gambit. Use the next Gambit to offer a fallback — email, callback scheduling, or just end the conversation gracefully.
+  </Accordion>
+  <Accordion title="Can multiple Livechat Gambits go to the same Inbox?">
+    Yes. You can have several Livechat Gambits across one or more Agents all routing to the same Inbox.
+  </Accordion>
+  <Accordion title="Can I pass custom information to the live chat agent, not just name/email?">
+    Yes — use the **Chat Start Message** field. Reference any Gambit's collected data with `@` to include it in the message the agent sees. For example, you might include the user's selected category, plan tier, or earlier issue summary.
+  </Accordion>
+  <Accordion title="Once a human takes over, can the AI Agent come back?">
+    Yes. After the human resolves the conversation, the flow continues to the Gambit after the Livechat Gambit. If that's an AI Agent Gambit, the AI picks up from there.
+  </Accordion>
+  <Accordion title="Does manual takeover work on any Gambit, or only AI Agent Gambits?">
+    Manual takeover works on any active conversation, regardless of which Gambit the user is currently in. The live chat agent can take over from the inbox at any point.
+  </Accordion>
+</AccordionGroup>
+
+## What's next
+
+- **Conversations inbox** — what live chat agents see and do on the receiving side

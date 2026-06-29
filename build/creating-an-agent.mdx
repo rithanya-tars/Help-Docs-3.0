@@ -1,1 +1,117 @@
+---
+title: "Create a Chat Deployment"
+description: "Set up an Agent in Tars — choose a starting point, name it, and open it in the builder."
+---
 
+An **Agent** is one configured chatbot solving one business problem. You can think of it as everything a single end-user-facing experience needs — the conversation logic, the AI behavior, the knowledge it draws on, the channels it's deployed to, and the inbox where its conversations land.
+
+This guide walks you through creating an Agent.
+
+## Before you start
+
+You need:
+
+- A Tars account with at least one **Organization** set up
+- The **Admin** or **Member** role in that Organization
+- A rough idea of what you want the Agent to do (lead capture, customer support, FAQs, etc.) — you can change this later
+
+<Note>
+  Every Agent belongs to an Organization. If you haven't created one yet, you'll be prompted to do that on first sign-in.
+</Note>
+
+## Step 1 — Open the Chat Deployments section
+
+From the left sidebar in your dashboard, click **Chat Deployments**.
+
+You'll see a list of all the Agents in your Organization. If this is your first one, the list will be empty.
+
+`[SCREENSHOT: Sidebar with "Chat Deployments" highlighted, empty list state]`
+
+## Step 2 — Start a new Agent
+
+Click the **`<TODO: verify button label — e.g. "Create Agent" / "+ New Deployment">`** button in the top right.
+
+A panel opens with four ways to start:
+
+| Starting point | What it does | When to use |
+| --- | --- | --- |
+| **From scratch** | Empty canvas. You build the flow Gambit by Gambit. | Full control, or your use case doesn't fit a template |
+| **From a template** | Pre-built Agent for a common use case (lead capture, support FAQ, etc.) | Fastest start; great for learning |
+| **From a knowledge source** | Upload a PDF or paste a URL — Tars creates an Agent trained on that content | You want an Agent that answers questions about specific content |
+| **From a tool** | Pick a tool (e.g. Calendly, HubSpot) — Tars builds an Agent around that action | You're automating one specific workflow |
+
+`[SCREENSHOT: Create Agent panel with the 4 starting points]`
+
+<Tip>
+  Not sure where to start? Pick **From a template** and choose one that's close to what you want. You can always edit it heavily later.
+</Tip>
+
+## Step 3 — Name your Agent
+
+Give your Agent a clear name like *"Website Lead Capture"* or *"Returns Support Bot"*. The name is internal — your end users won't see it.
+
+`[SCREENSHOT: Naming the Agent]`
+
+<Note>
+  You can rename an Agent any time from its General settings.
+</Note>
+
+## Step 4 — Open the builder
+
+Once created, your Agent opens directly in the **Make** section of the builder. This is where you design the conversation flow.
+
+You'll see four tabs at the top of the Agent:
+
+- **Make** — design the conversation (where you are now)
+- **Configure** — settings like language, notifications, voice
+- **Test** — try the Agent before going live
+- **Distribute** — deploy to web, WhatsApp, email, SMS, or voice
+
+`[SCREENSHOT: The 4-tab view inside an Agent]`
+
+## What's in an Agent
+
+Every Agent has:
+
+- **A flow** — the conversation logic, made up of Gambits (steps) connected together
+- **Configuration** — language, notification, voice, and other behavioral settings
+- **Test runs** — preview the Agent before publishing
+- **Channels** — where end users will reach the Agent (configured in Distribute)
+- **An inbox** — every conversation across all channels shows up in one place (in the **Conversations** section)
+- **Environments** — one Production environment + up to 10 Staging/Preview environments for testing different versions
+
+Knowledge Bases and Tools sit at the **Organization** level, so they're shared across all Agents in your Org — you don't need to create them per Agent.
+
+## Choosing your build mode
+
+Inside the Make section, you can build the Agent's conversation in two modes — or combine them:
+
+- **Workflow-based** — a deterministic flow of Gambits the user moves through (good for forms, lead capture, fixed paths)
+- **Conversational AI** — an LLM-driven Agent with access to your Knowledge Base and Tools (good for open Q&A, support, multi-turn conversations)
+
+Most real Agents use both. For example, a workflow collects the user's intent and details, then hands off to a Conversational AI Gambit to answer their questions.
+
+The next two guides cover each mode in detail.
+
+## Common questions (these are mintlify tags)
+
+<AccordionGroup>
+  <Accordion title="Can I have multiple Agents in one Organization?">
+    Yes. Most Organizations have one or two Agents to start. Larger customers often have several — one per business unit, one per use case, or one per region.
+  </Accordion>
+  <Accordion title="Can I copy an existing Agent?">
+    <Yes. You can make a copy of an existing Agent.>
+  </Accordion>
+  <Accordion title="Do I need to set up a Knowledge Base before creating an Agent?">
+    No. You can create an Agent first and add a Knowledge Base later. If you pick **From a knowledge source** when creating, Tars will set up a basic Knowledge Base for you automatically.
+  </Accordion>
+  <Accordion title="Can two team members edit the same Agent?">
+    Yes. Both Admins and Members can edit Agents in their Organization. 
+  </Accordion>
+</AccordionGroup>
+
+## What's next (hyperlinked)
+
+- **Building with Workflow-based mode** — design step-by-step flows using Gambits
+- **Building with Conversational AI mode** — set up an LLM-driven Agent with Tools and Knowledge
+- **Live Chat handoff** — let human agents take over when the Agent can't help

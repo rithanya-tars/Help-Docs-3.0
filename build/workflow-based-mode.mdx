@@ -1,0 +1,163 @@
+---
+title: "Workflow-based mode"
+description: "Design a structured conversation flow using Gambits — the building blocks of every Agent."
+---
+
+Workflow-based mode lets you design a conversation as a flowchart. Each step in the flow is a **Gambit** — a single back-and-forth between the Agent and the user. You add Gambits, connect them, and the user moves through the flow as the conversation progresses.
+
+Use Workflow-based mode when the path through the conversation is predictable — lead capture, appointment booking, multi-step forms, structured support flows.
+
+## The Make canvas
+
+When you open an Agent, you land in the **Make** section. This is the visual canvas where you build the flow.
+
+`SCREENSHOT: Make canvas`
+
+Key elements:
+
+- **`+` button** (top-left) — opens the Gambit picker
+- **Canvas** — where you arrange and connect Gambits
+- **Preview** (top-right) — try the Agent live
+- **Publish Agent** (top-right) — push changes to your published Agent
+- **Left sidebar** — switch between Make, Knowledge, Tools, Test, Distribute
+
+## The first Gambit
+
+Every Agent starts with **Gambit 1**. This is the **Start Gambit** — the conversation begins here.
+
+<Note>
+  The first Gambit cannot be deleted. The conversation always starts from Gambit 1.
+</Note>
+
+If a Gambit isn't connected to the flow, it will never run — even if it's perfectly configured. This is called an **abandoned Gambit**.
+
+## Adding Gambits
+
+Click the **`+` button** (top-left of the canvas) to open the Gambit picker. You can also drag a Gambit from the picker directly onto the canvas.
+
+`SCREENSHOT: Gambit picker`
+
+Gambits are grouped into six categories:
+
+| Category | What it does |
+| --- | --- |
+| **User Inputs** | Collect responses — text, button choices, dates, ratings, files |
+| **AI Gambits** | Add AI-driven behavior — full Agents, data extraction, intent detection |
+| **Tools** | Run actions via integrations (refund, lookup, push to CRM) |
+| **Knowledge** | Retrieve from a Knowledge Base.  |
+| **Triggers** | Start the flow on an external event — e.g., a webhook |
+| **Integration** | API calls, Custom Code (JavaScript), and Live Chat handoff |
+
+### User Input Gambits
+
+The most common Gambit type. Each User Input Gambit has two parts:
+
+1. **Messages** — what the Agent says (one or more messages, with optional emoji/media)
+2. **User Input** — what response to collect from the user
+
+`[SCREENSHOT: User Input Gambit]`
+
+The User Input field has a **type dropdown** with options:
+
+- **Text** (open text, with validation options for email, phone, names, etc.)
+- **Number**
+- **Button** (predefined choices)
+- **Auto Suggestion** (text input with suggested values)
+- **Ratings** (star rating)
+- **Date and Time**
+- **File Upload**
+- **Full Name**, **First Name**, **Last Name**, **Email Address** (pre-validated text variants)
+
+### The Agent Mode toggle
+
+Inside every User Input Gambit, there's an **Agent Mode** toggle.
+
+`[SCREENSHOT: Agent Mode toggle]`
+
+- **Off (default)** — the Agent shows the user a static input (e.g., a button row, a text field). The user picks or types directly.
+- **On** — the Agent talks the user through the input step-by-step in natural language. It collects the same data, but in a conversational way.
+
+Use Agent Mode when you want a more human feel, without converting the whole flow to an AI Agent Gambit.
+
+<Tip>
+  Agent Mode collects the same data as static mode — just conversationally. The downstream flow stays exactly the same.
+</Tip>
+
+### AI Gambits
+
+Three types:
+
+| Gambit | Use it when |
+| --- | --- |
+| **Agent** | You want full AI-driven conversation with tools and Knowledge access |
+| **Data Collector** | You want to extract specific info (name, date, intent) from a user message |
+| **Categorizer** | You want to detect what the user is trying to do, then branch |
+
+### Integration Gambits
+
+Three types:
+
+| Gambit | What it does |
+| --- | --- |
+| **API** | Make an HTTP request to any REST endpoint during the flow |
+| **Custom Code** | Run custom JavaScript at this point in the flow |
+| **Live Chat handoff** | Hand off the conversation to a human agent |
+
+### Tools and Knowledge
+
+**Tools** are org-level and can be invoked from a Tool Gambit in Workflow mode, *or*  from an AI Agent Gambit (which decides itself when to call them).
+
+**Knowledge** can only be attached to an AI Agent Gambit — not used standalone in Workflow mode.
+
+## Connecting Gambits
+
+Every Gambit has:
+
+- One **input socket** at the top
+- One or more **output sockets** at the bottom
+
+Drag from an output socket to the input socket of the next Gambit to connect them. The user moves through the flow following these connections.
+
+`[SCREENSHOT: or GIF]`
+
+## Saving and publishing
+
+- **Save** (inside an open Gambit) — saves changes to that Gambit
+- **Publish Agent** (top right) — pushes the entire current flow to your live Agent
+
+<Note>
+  Changes don't go live until you click **Publish Agent**. You can save edits and continue working without affecting the published version.
+</Note?
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="Can I delete the first Gambit?">
+    No. Gambit 1 is the Start Gambit and always exists.
+  </Accordion>
+  <Accordion title="What happens if I leave a Gambit unconnected?">
+    Unconnected Gambits don't run, even if they're fully configured. They sit on the canvas as **abandoned Gambits**. Use Preview to check that every path you expect to work is actually reachable.
+  </Accordion>
+  <Accordion title="How many Gambits should I use?">
+    As few as the flow needs. A simple lead-capture flow might be 3–5 Gambits. Add complexity only when the flow genuinely requires it — overly long flows are harder to maintain and harder for users to complete.
+  </Accordion>
+  <Accordion title="Can I mix Workflow-based and Conversational AI modes in one Agent?">
+    Yes — and most real Agents do. A common pattern: start with a few User Input Gambits to qualify and collect details, then hand off to an AI Agent Gambit to answer open-ended questions.
+  </Accordion>
+  <Accordion title="What's the difference between Agent Mode (the toggle) and an AI Agent Gambit?">
+    **Agent Mode toggle** turns a User Input Gambit into a conversational version of itself — same data collected, just asked conversationally.
+
+```
+**AI Agent Gambit** is a different Gambit type entirely. It's a full LLM-driven Agent with access to Tools and Knowledge, capable of multi-turn open conversation. Use the toggle for small inputs, use the Gambit for full conversational sections.
+```
+
+</Accordion>
+  <Accordion title="What happens when the conversation reaches a Gambit with no output socket?">
+    The conversation ends at that point. The user sees the Agent's final message but can't respond further unless the Agent is configured to restart.
+  </Accordion>
+</AccordionGroup>
+
+## What's next (hyperlinks)
+
+- **Tools** — using Tools inside Workflow mode
+- **Conversational AI mode** — the LLM-driven alternative

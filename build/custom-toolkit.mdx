@@ -1,0 +1,158 @@
+---
+title: "Custom Toolkit"
+description: "Build your own Tool with TypeScript when the pre-built catalog doesn't cover what you need."
+---
+
+A **Custom Toolkit** lets you write your own Tool in TypeScript when the pre-built catalog doesn't include the service you need — or when you need a customised version of an existing action.
+
+Like pre-built tools, a Custom Toolkit lives at the **Organization** level and can be attached to any Agent in your Org, in Workflow-based mode or with an AI Agent Gambit.
+
+## When to use Custom Toolkit
+
+- The service you need isn't in the pre-built catalog
+- A pre-built tool exists but you need different behaviour (different input shape, custom validation, multi-step logic)
+- You want to orchestrate two or more pre-built tools together as a single action
+
+## Creating a Custom Toolkit
+
+1. Go to the **Tools** page and open the **Available Tools** tab
+2. Click **Create New Tool.** A dialog opens with two options. Select **Custom toolkit**.
+
+`[SCREENSHOT: Create new tool dialog showing API tool and Custom toolkit options]`
+
+The new toolkit opens on the Settings page.
+
+## Toolkit Settings
+
+This is the toolkit-wide configuration that applies to every action inside.
+
+`[SCREENSHOT: Custom Toolkit Settings page]`
+
+### Environment variables (Secrets)
+
+Toolkit-wide secrets — API keys, tokens, or credentials that are shared across every action in this toolkit.
+
+Click **+ Add Secret** to store one. Stored values are encrypted and accessed in your action code via `env.KEY_NAME`.
+
+<Tip>
+  Use toolkit-wide secrets for things that don't change between actions (e.g., a single API key your whole toolkit uses). Use action-level secrets (covered below) for credentials specific to one action.
+</Tip>
+
+## Actions
+
+Actions are the **subtools** inside the toolkit — each action is one callable function. A toolkit can have one action or many.
+
+Each action row has:
+
+- The action name and description
+- A toggle to enable/disable it (disabled actions can't be called)
+- A delete button
+- A chevron to open the action editor
+
+Click **+ Add Action** to create a new one.
+
+## Building an Action
+
+Opening an action shows the editor.
+
+`[SCREENSHOT: Action editor with Action details, Secrets, Input/Output, Connected toolkits, and the TypeScript code editor]`
+
+### Action details
+
+- **Display name** — what the action is called in the UI
+- **Action ID** — internal identifier used in code
+- **Description** — *important* — this is what the AI Agent (if connected to an AI Agent gambit) reads to understand what the action does and when to use it. Be specific.
+
+<Tip>
+  A vague description like *"Sends data"* makes the AI Agent unreliable about when to call this action. A specific description like *"Sends a lead summary email to the sales team when the user completes a booking"* makes it call the action correctly.
+</Tip>
+
+### Secrets
+
+Action-specific secrets — credentials that are only used by this action. Use these instead of toolkit-wide secrets when only one action needs them. Access them in code the same way: `env.KEY_NAME`.
+
+### Input / Output
+
+Define the parameters the action takes and returns.
+
+- **Input parameters** — what data the action needs to run. Typed in your code as `input.*` (e.g., `input.email`, `input.amount`).
+- **Output** — what the action returns when it succeeds. Typed as `output.*`.
+
+Add parameters with **+ Add Parameters**. Each parameter has a name, a type (string, number, boolean, etc.), and a description.
+
+### Connected toolkits
+
+If your action needs to call another tool — say, you're writing custom logic that ends up calling Salesforce — attach those toolkits here. They become available in your code as `toolkits.*`.
+
+Click **+ Add Toolkit** to attach a pre-built or custom toolkit.
+
+### TypeScript code
+
+The bottom of the page is a code editor where you write the action itself.
+
+A minimal action looks like:
+
+```tsx
+import { toolkits, storage, type Input, type Output } from 'tars'
+
+async function run(input: Input): Promise<Output> {
+  // your logic here
+  return { successful: true, data: { /* your return data */ } }
+}
+```
+
+Inside `run`:
+
+- Use `input.fieldName` to read the parameters you defined
+- Use `env.KEY_NAME` to read secrets
+- Use `toolkits.toolkitName.actionName(...)` to call any connected toolkits
+- Return an object matching your Output shape
+
+Use the **Types** button (top right of the editor) to see the generated TypeScript types for your inputs, outputs, and connected toolkits.
+
+## Saving and deploying
+
+There are two buttons at the top of the action editor:
+
+- **Save** — saves your changes as a draft. The action is *not* live yet.
+- **Deploy** — pushes the action live. After deployment, the action shows a **Deployed** badge and can be used by Agents.
+
+`[SCREENSHOT: Save and Deploy buttons in the action editor header, with the Deployed badge]`
+
+<Note>
+  An action must be deployed before any Agent can call it. Saving alone is not enough.
+</Note>
+
+To roll back changes, use the **Reset** button (next to Deploy) to revert to the last deployed version.
+
+## Using your Custom Toolkit in an Agent
+
+Once deployed, your Custom Toolkit shows up in **Installed Tools** alongside pre-built tools. From there, use it exactly like any other tool:
+
+- **In Workflow mode** — add it as a Tool Gambit, pick the action as the trigger, fill in the inputs
+- **With an AI Agent Gambit** — attach the toolkit in the Tools section, enable the actions you want, and tell the Agent when to use them in the prompt
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="What's the difference between API tool and Custom toolkit?">
+    **API tool** auto-generates a tool from an OpenAPI or Swagger spec file — paste the spec, and the tool is created with the endpoints already wired up. Best when the service has a well-defined OpenAPI spec.
+
+```
+**Custom toolkit** is fully hand-written TypeScript. Use it when you need custom logic, validation, multi-step operations, or orchestration across multiple existing tools.
+```
+
+</Accordion>
+  <Accordion title="Can I edit a deployed action without affecting Agents using it?">
+    Yes. Editing and saving creates a draft — Agents continue using the last deployed version. The new version only goes live when you click **Deploy**.
+  </Accordion>
+  <Accordion title="Where are my secrets stored?">
+    Secrets are encrypted at rest and only accessible inside your action code via `env.KEY_NAME`. They're never exposed in the UI after being set.
+  </Accordion>
+  <Accordion title="Can one Custom Toolkit have multiple actions?">
+    Yes. A toolkit is a container — you can add as many actions as you need. Group related actions in one toolkit (e.g., one toolkit for all your CRM logic).
+  </Accordion>
+  <Accordion title="What happens if I delete a Custom Toolkit that's being used?">
+    Any Agents currently using its actions will stop being able to call them — their flow will fail at that step. Make sure no Agents depend on the toolkit before deleting.
+  </Accordion>
+</AccordionGroup>

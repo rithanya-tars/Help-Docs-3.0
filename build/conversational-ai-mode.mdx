@@ -1,0 +1,135 @@
+---
+title: "Conversational AI mode"
+description: "Use an AI Agent Gambit for open, LLM-driven conversations with access to Tools and Knowledge."
+---
+
+Conversational AI mode is built around the **AI Agent Gambit** — a single Gambit that handles open, multi-turn conversation using a language model. Instead of moving the user through fixed steps, the AI Agent decides what to say, what Tools to call, and what Knowledge to pull from, turn by turn.
+
+Use Conversational AI mode when the conversation can go in many directions — support, open Q&A, complex sales conversations, anything where a fixed flow would feel rigid.
+
+## When to use which mode
+
+| Workflow-based | Conversational AI |
+| --- | --- |
+| Predictable path (lead capture, booking, fixed forms) | Open-ended, can branch many ways |
+| Need exact data structure | Need natural conversation |
+| Conversation is short and goal-driven | Conversation is exploratory |
+
+Most real Agents combine both. Use Workflow Gambits to qualify and route, then drop into a Conversational AI Gambit when the conversation gets open.
+
+## Adding an AI Agent Gambit
+
+From the Gambit picker, open the **AI Gambits** category and add **Agent** to the canvas.
+
+## How the AI Agent Gambit works
+
+Two output sockets:
+
+- **Success branch** — taken when the LLM judges the response successfully addressed the user's query
+- **Default branch** — taken when the conversation needs to continue or didn't reach a clear success
+
+For a simple, open-ended conversation, **connect both outputs back to the AI Agent Gambit itself** — the conversation will loop until the user leaves. For flows where you want a different next step (a confirmation message, a routing decision, a follow-up Gambit), connect the outputs to the next Gambits.
+
+`[SCREENSHOT: Two patterns side by side — (a) AI Agent looping to itself, (b) AI Agent feeding into Success + Default branches]`
+
+## Configuring the Agent
+
+Opening an AI Agent Gambit shows four sections:
+
+`[SCREENSHOT: Agent Settings section showing Model, Prompt, Tools]`
+
+### 1. Welcome Message
+
+The first message the Agent sends when the conversation enters this Gambit. 
+
+### 2. Agent Settings
+
+This is the core of the AI Agent.
+
+**Model**
+
+Pick the language model that runs the Agent. Different models trade off speed, cost, and capability.
+
+<Note>
+  Some models are available only on Pro and higher plans. Free-tier accounts will see Pro models marked but can't select them.
+</Note>
+
+**Prompt**
+
+The system prompt — instructions telling the Agent its role, tone, goal, and any rules it must follow. This is the single biggest lever for Agent behavior.
+
+Use the **Generate** button to auto-draft a prompt based on the Agent's context, then edit it. 
+
+<Tip>
+  Vague prompts produce vague, unpredictable responses. Specific prompts produce reliable Agents. Spend time here.
+</Tip>
+
+**Tools**
+
+Attach Tools the Agent can call during conversation — refund actions, CRM lookups, calendar bookings, anything from your org's Tool catalog. The Agent decides on its own when to call which Tool.
+
+`[SCREENSHOT: Tools picker with attached tools showing green dots]`
+
+Tools attached to the Agent appear with a green dot when they're successfully connected. To attach Knowledge to the Agent, use the **Knowledge** category.
+
+### 3. Override user input
+
+By default, the Agent receives the user's message as input. The **Override user input** field lets you send something different instead — useful when you want to pass structured context to the Agent rather than (or alongside) what the user typed.
+
+For example, if you've collected the user's name and query in earlier Gambits, you can pass them into the Agent so it has full context from message one.
+
+`[SCREENSHOT: Override user input field with example]`
+
+<Note>
+  This is an advanced field. Leave it blank to use the user's message directly — that works for most Agents.
+</Note>
+
+### 4. Jump Logic
+
+Controls which output socket the Gambit takes after each response.
+
+`[SCREENSHOT: Jump Logic section with Branch 1 (Success) and Default Branch]`
+
+**Branch 1 (Success)**
+
+Has a **Success Prompt** — instructions to the LLM about what counts as a "successful" response. For example: *"The user's query has been fully resolved and they confirmed they don't need anything else."*
+
+When the Success Prompt is matched after a response, the flow takes the Success branch.
+
+**Default Branch**
+
+Taken when the Success Prompt isn't matched — i.e., when the conversation should continue. This is the default path the Agent stays on while the user is still talking.
+
+## Saving and publishing
+
+Click **Save** inside the Gambit to save changes. Click **Publish Agent** (top right of the canvas) to push the updated Agent to live.
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="Should I always use Conversational AI mode?">
+    No. Workflow-based mode is faster, and more predictable for structured tasks. Use Conversational AI when the conversation genuinely needs open-ended reasoning — most Agents are best as a mix of both.
+  </Accordion>
+  <Accordion title="What happens if I pick a Pro model on a Free plan?">
+    Pro-only models are marked in the dropdown. You can see them but can't select them on a Free plan. Upgrade to use them.
+  </Accordion>
+  <Accordion title="How do I know if my prompt is good?">
+    Test it in **Preview**. Try a range of user inputs — including ones that try to make the Agent go off-topic or do something it shouldn't. A good prompt holds up; a vague prompt breaks immediately.
+  </Accordion>
+  <Accordion title="What's the difference between attaching Tools to an AI Agent vs using a Tool Gambit?">
+    A **Tool Gambit** in Workflow mode runs the Tool at a fixed step you defined. The **Tools attached to an AI Agent** are called by the Agent itself, only when it decides they're needed.
+  </Accordion>
+  <Accordion title="Can the Agent call the same Tool multiple times in one conversation?">
+    Yes. The Agent calls Tools as needed during the conversation — the same Tool can be called multiple times if useful.
+  </Accordion>
+  <Accordion title="What does the Success branch actually do?">
+    It changes which Gambit the user goes to next. If the LLM judges the response satisfies the Success Prompt, the flow follows the Success output socket. If not, it follows the Default socket — usually back to the Agent for another turn.
+  </Accordion>
+</AccordionGroup>
+
+## What's next (hyperlinked)
+
+- **Knowledge Base** — attach a Knowledge Base so the Agent can answer from your documents
+- **Tools** — set up Tools the Agent can call
+- **Live Chat handoff** — hand off from the Agent to a human
+- **Test your Agent** — use Preview to try the Agent before publishing
