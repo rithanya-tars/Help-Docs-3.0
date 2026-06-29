@@ -27,7 +27,7 @@ Each tool card shows the name, a short description, the number of subtools it in
 
 ## Subtools
 
-Each tool in the catalog is a collection of **subtools** — individual actions you can perform with that service. For example, the Outlook tool might include subtools like *Send email*, *Read inbox*, *Create draft*, *Schedule meeting*, and so on.
+Each tool in the catalog is a collection of **subtools** — individual actions you can perform with that service. For example, the Outlook tool might include subtools like _Send email_, _Read inbox_, _Create draft_, _Schedule meeting_, and so on.
 
 When you use the tool, you pick which subtools you want to enable. A Salesforce tool with 216 subtools doesn't mean your Agent uses all 216 — you enable the ones relevant to your use case.
 
@@ -36,15 +36,13 @@ When you use the tool, you pick which subtools you want to enable. A Salesforce 
 1. Go to the **Available Tools** tab
 2. Find the tool you want — use search if the catalog is long
 3. Click **Add Tool**
-    
-    `[SCREENSHOT: Tool card with Add Tool button]`
-    
+   `[SCREENSHOT: Tool card with Add Tool button]`
 
 The tool moves to your **Installed Tools** tab. From there, you need to connect your account before you can actually use it.
 
 ## Connecting your account
 
-Each tool needs authentication so it can act on your behalf — sending email from *your* Outlook, creating leads in *your* Salesforce, and so on.
+Each tool needs authentication so it can act on your behalf — sending email from _your_ Outlook, creating leads in _your_ Salesforce, and so on.
 
 There are two auth methods:
 
@@ -68,25 +66,15 @@ In Workflow-based mode, a tool is added as a Tool Gambit at a fixed step in the 
 1. Add the tool from the Gambit picker (it appears under the tool's name)
 2. Open the Gambit and turn on **Enable Workflow Mode**
 3. Under **Tool Selection**, confirm the connected account
-4. Under **Configure action**, **Select a trigger** — this is the subtool to run
-<Note> In Workflow-based mode, only **one subtool** can be selected per Tool Gambit. If you need multiple actions, use multiple Tool Gambits, or use the tool with an AI Agent Gambit (which allows many) or add additional gambits in the workflow mode with the other action enabled.
-</Note>
-    
-    `[SCREENSHOT: Workflow Mode toggle on, Tool Selection section, Select a trigger dropdown]`
-    
+4. `[SCREENSHOT: Workflow Mode toggle on, Tool Selection section, Select a trigger dropdown]`
 5. Fill in the **Input configuration** — the fields the subtool needs to run
-    
-    `[SCREENSHOT: Input configuration section]`
-    
-    For example, to send an email with Outlook:
-    
-    - **subject** — the email subject
-    - **body** — the email content (can be HTML)
-    - **is_html** — true if the body is HTML
-    - Recipient address, attachments, etc., as applicable
-    
-    You can use `@` to reference values collected in earlier Gambits — e.g., pull the user's name and email from a previous User Input Gambit into the email body.
-    
+   `[SCREENSHOT: Input configuration section]`
+   For example, to send an email with Outlook:
+   - **subject** — the email subject
+   - **body** — the email content (can be HTML)
+   - **is\_html** — true if the body is HTML
+   - Recipient address, attachments, etc., as applicable
+   You can use `@` to reference values collected in earlier Gambits — e.g., pull the user's name and email from a previous User Input Gambit into the email body.
 6. Click **Save**
 
 When the conversation reaches this Gambit, the tool runs with the values you configured.
@@ -96,15 +84,15 @@ When the conversation reaches this Gambit, the tool runs with the values you con
 This is the more flexible setup — the AI Agent decides when to call the tool based on the conversation.
 
 1. Open the AI Agent Gambit
-2. In the **Tools** section, click **+ Add** and pick the tool
+2. In the **Tools** section, click **\+ Add** and pick the tool
 3. Enable the subtools you want the Agent to have access to — you can enable as many as you need
-4. In the Agent's **Prompt**, tell the Agent when and how to use the tool — e.g., *"When the user requests a callback, send a confirmation email using the Send email subtool with the subject 'Callback confirmed' and the details they provided."*
+4. In the Agent's **Prompt**, tell the Agent when and how to use the tool — e.g., _"When the user requests a callback, send a confirmation email using the Send email subtool with the subject 'Callback confirmed' and the details they provided."_
 5. Save the Gambit and publish the Agent
 
 The Agent now has the tool available throughout the conversation and calls it whenever the prompt's conditions are met.
 
 <Tip>
-  Be specific in your prompt about which subtool to use and what inputs to pass. Vague instructions like "*use the email tool when needed*" produce unreliable behaviour. Specific instructions like "*send an email using Send email subtool when the user confirms their booking, with their name in the subject and confirmation details in the body*" produce reliable behaviour.
+  Be specific in your prompt about which subtool to use and what inputs to pass. Vague instructions like "_use the email tool when needed_" produce unreliable behaviour. Specific instructions like "_send an email using Send email subtool when the user confirms their booking, with their name in the subject and confirmation details in the body_" produce reliable behaviour.
 </Tip>
 
 ## Common questions
@@ -113,24 +101,27 @@ The Agent now has the tool available throughout the conversation and calls it wh
   <Accordion title="Can I use the same tool in multiple Agents?">
     Yes. Tools are Organization-level. Once you've added and connected a tool, any Agent in your Org can use it — either as a Tool Gambit in Workflow mode or attached to an AI Agent Gambit.
   </Accordion>
+
   <Accordion title="What's the difference between using a tool in Workflow mode vs with an AI Agent?">
     **Workflow mode** runs the tool at a fixed step you defined, with values you configured in advance. Predictable, one subtool per Gambit.
 
-```
-**AI Agent** has the tool available throughout the conversation and decides when to call which subtool based on the prompt and the conversation. Flexible, many subtools per attachment.
+    ```text
+    **AI Agent** has the tool available throughout the conversation and decides when to call which subtool based on the prompt and the conversation. Flexible, many subtools per attachment.
+    
+    Use Workflow mode when the action is predictable and always happens at the same point. Use AI Agent attachment when the action depends on the conversation.
+    ```
+  </Accordion>
 
-Use Workflow mode when the action is predictable and always happens at the same point. Use AI Agent attachment when the action depends on the conversation.
-```
-
-</Accordion>
   <Accordion title="What if my account disconnects?">
     Tool calls will fail until you reconnect. Go to the **Installed Tools** tab, find the tool, and re-authenticate.
   </Accordion>
+
   <Accordion title="Can I use multiple subtools from one tool in a single Agent?">
     Yes — but only when the tool is attached to an AI Agent Gambit. In Workflow mode, each Tool Gambit handles a single subtool, so you'd add multiple Tool Gambits if you need multiple actions in a flow.
   </Accordion>
+
   <Accordion title="What if the tool I need isn't in the catalog?">
-    Use **Custom Toolkit** to write your own tool with custom logic. See [Custom Toolkit] (hyperlink)
+    Use **Custom Toolkit** to write your own tool with custom logic. See \[Custom Toolkit\] (hyperlink)
   </Accordion>
 </AccordionGroup>
 

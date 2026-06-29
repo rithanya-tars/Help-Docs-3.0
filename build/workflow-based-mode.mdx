@@ -44,7 +44,7 @@ Gambits are grouped into six categories:
 | **User Inputs** | Collect responses — text, button choices, dates, ratings, files |
 | **AI Gambits** | Add AI-driven behavior — full Agents, data extraction, intent detection |
 | **Tools** | Run actions via integrations (refund, lookup, push to CRM) |
-| **Knowledge** | Retrieve from a Knowledge Base.  |
+| **Knowledge** | Retrieve from a Knowledge Base. |
 | **Triggers** | Start the flow on an external event — e.g., a webhook |
 | **Integration** | API calls, Custom Code (JavaScript), and Live Chat handoff |
 
@@ -105,7 +105,7 @@ Three types:
 
 ### Tools and Knowledge
 
-**Tools** are org-level and can be invoked from a Tool Gambit in Workflow mode, *or*  from an AI Agent Gambit (which decides itself when to call them).
+**Tools** are org-level and can be invoked from a Tool Gambit in Workflow mode, _or_  from an AI Agent Gambit (which decides itself when to call them).
 
 **Knowledge** can only be attached to an AI Agent Gambit — not used standalone in Workflow mode.
 
@@ -127,7 +127,7 @@ Drag from an output socket to the input socket of the next Gambit to connect the
 
 <Note>
   Changes don't go live until you click **Publish Agent**. You can save edits and continue working without affecting the published version.
-</Note?
+</Note>
 
 ## Common questions
 
@@ -135,23 +135,27 @@ Drag from an output socket to the input socket of the next Gambit to connect the
   <Accordion title="Can I delete the first Gambit?">
     No. Gambit 1 is the Start Gambit and always exists.
   </Accordion>
+
   <Accordion title="What happens if I leave a Gambit unconnected?">
     Unconnected Gambits don't run, even if they're fully configured. They sit on the canvas as **abandoned Gambits**. Use Preview to check that every path you expect to work is actually reachable.
   </Accordion>
+
   <Accordion title="How many Gambits should I use?">
     As few as the flow needs. A simple lead-capture flow might be 3–5 Gambits. Add complexity only when the flow genuinely requires it — overly long flows are harder to maintain and harder for users to complete.
   </Accordion>
+
   <Accordion title="Can I mix Workflow-based and Conversational AI modes in one Agent?">
     Yes — and most real Agents do. A common pattern: start with a few User Input Gambits to qualify and collect details, then hand off to an AI Agent Gambit to answer open-ended questions.
   </Accordion>
+
   <Accordion title="What's the difference between Agent Mode (the toggle) and an AI Agent Gambit?">
     **Agent Mode toggle** turns a User Input Gambit into a conversational version of itself — same data collected, just asked conversationally.
 
-```
-**AI Agent Gambit** is a different Gambit type entirely. It's a full LLM-driven Agent with access to Tools and Knowledge, capable of multi-turn open conversation. Use the toggle for small inputs, use the Gambit for full conversational sections.
-```
+    ```text
+    **AI Agent Gambit** is a different Gambit type entirely. It's a full LLM-driven Agent with access to Tools and Knowledge, capable of multi-turn open conversation. Use the toggle for small inputs, use the Gambit for full conversational sections.
+    ```
+  </Accordion>
 
-</Accordion>
   <Accordion title="What happens when the conversation reaches a Gambit with no output socket?">
     The conversation ends at that point. The user sees the Agent's final message but can't respond further unless the Agent is configured to restart.
   </Accordion>
